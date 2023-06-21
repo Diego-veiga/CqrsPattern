@@ -8,6 +8,6 @@ export default class UserController {
     const { name, lastName, email, password } = request.body;
     await createCommandHandler.handle({ name, lastName, email, password });
 
-    return response.status(201);
+    return response.status(201).json({ message: 'user created successfully' });
   }
 }
