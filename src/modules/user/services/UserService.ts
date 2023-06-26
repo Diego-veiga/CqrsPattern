@@ -1,5 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 import { ICreateUser } from '../domain/ICreateUsers';
+import { IUpdateUser } from '../domain/IUpdateUsers';
 import IUsersRepository from '../domain/repositories/IUsersRepository';
 import UserView from '../domain/UserView';
 import IUserService from './interfaces/IUserService';
@@ -11,9 +12,8 @@ export default class UserService implements IUserService {
     private userRepository: IUsersRepository,
   ) {}
 
-  async ExistUserThisEmail(email: string): Promise<boolean> {
-    const userExist = await this.userRepository.findByEmail(email);
-    return userExist ? true : false;
+  async FindByEmail(email: string): Promise<UserView | null> {
+    return await this.userRepository.findByEmail(email);
   }
   async CreateUser(user: ICreateUser): Promise<void> {
     await this.userRepository.create(user);
@@ -23,5 +23,8 @@ export default class UserService implements IUserService {
   }
   async Delete(id: string): Promise<void> {
     await this.userRepository.delete(id);
+  }
+  async update(user: IUpdateUser): Promise<void> {
+    await this.userRepository.update(user);
   }
 }
