@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export default interface CreateUserCommand {
+export default interface ICreateUserCommand {
   name: string;
   lastName: string;
   email: string;

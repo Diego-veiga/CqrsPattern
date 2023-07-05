@@ -3,12 +3,12 @@ import IUserService from '@modules/user/services/interfaces/IUserService';
 import { AppError } from '@shared/errors/AppError';
 import { hash } from 'bcryptjs';
 import { inject, injectable } from 'tsyringe';
-import CreateUserCommand from '../Interfaces/CreateUserCommand';
+import ICreateUserCommand from '../Interfaces/ICreateUserCommand';
 
 @injectable()
 export default class CreateUserCommandHandler {
   constructor(@inject('UserService') private userService: IUserService) {}
-  async handle(createUserCommand: CreateUserCommand): Promise<void> {
+  async handle(createUserCommand: ICreateUserCommand): Promise<void> {
     if (await this.userService.ExistUserThisEmail(createUserCommand.email)) {
       throw new AppError('There is already a user with this Email');
     }

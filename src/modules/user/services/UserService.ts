@@ -1,6 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import { ICreateUser } from '../domain/ICreateUsers';
 import IUsersRepository from '../domain/repositories/IUsersRepository';
+import UserView from '../domain/UserView';
 import IUserService from './interfaces/IUserService';
 
 @injectable()
@@ -16,5 +17,11 @@ export default class UserService implements IUserService {
   }
   async CreateUser(user: ICreateUser): Promise<void> {
     await this.userRepository.create(user);
+  }
+  async FindById(id: string): Promise<UserView | null> {
+    return await this.userRepository.findById(id);
+  }
+  async Delete(id: string): Promise<void> {
+    await this.userRepository.delete(id);
   }
 }
