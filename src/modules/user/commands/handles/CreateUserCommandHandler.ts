@@ -9,7 +9,7 @@ import ICreateUserCommand from '../Interfaces/ICreateUserCommand';
 export default class CreateUserCommandHandler {
   constructor(@inject('UserService') private userService: IUserService) {}
   async handle(createUserCommand: ICreateUserCommand): Promise<void> {
-    if (await this.userService.ExistUserThisEmail(createUserCommand.email)) {
+    if (await this.userService.FindByEmail(createUserCommand.email)) {
       throw new AppError('There is already a user with this Email');
     }
 

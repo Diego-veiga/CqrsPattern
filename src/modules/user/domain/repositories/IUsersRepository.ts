@@ -1,5 +1,6 @@
 import User from '@modules/user/infra/typeorm/entities/user';
 import { ICreateUser } from '../ICreateUsers';
+import { IUpdateUser } from '../IUpdateUsers';
 import UserView from '../UserView';
 
 export default interface IUsersRepository {
@@ -7,4 +8,5 @@ export default interface IUsersRepository {
   findByEmail(email: string): Promise<UserView | null>;
   findById(id: string): Promise<UserView | null>;
   delete(id: string): Promise<void>;
+  update(user: IUpdateUser): Promise<void>;
 }

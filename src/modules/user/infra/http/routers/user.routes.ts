@@ -19,14 +19,20 @@ userRouter.post(
   userController.create,
 );
 
-userRouter.delete(
+userRouter.put(
   '/:id',
   celebrate({
     [Segments.PARAMS]: {
       id: Joi.string().required().guid(),
     },
+    [Segments.BODY]: {
+      name: Joi.string().required(),
+      lastName: Joi.string().required(),
+      email: Joi.string().email().required(),
+      password: Joi.string().required(),
+    },
   }),
-  userController.delete,
+  userController.update,
 );
 
 export default userRouter;
