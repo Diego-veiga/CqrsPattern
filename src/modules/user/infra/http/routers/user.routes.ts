@@ -35,4 +35,16 @@ userRouter.put(
   userController.update,
 );
 
+userRouter.get(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().required().guid(),
+    },
+  }),
+  userController.findById,
+);
+
+userRouter.get('/', userController.findAll);
+
 export default userRouter;

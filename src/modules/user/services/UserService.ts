@@ -11,6 +11,9 @@ export default class UserService implements IUserService {
     @inject('UserRepository')
     private userRepository: IUsersRepository,
   ) {}
+  async FindAll(): Promise<UserView[]> {
+    return await this.userRepository.findAll();
+  }
 
   async FindByEmail(email: string): Promise<UserView | null> {
     return await this.userRepository.findByEmail(email);
